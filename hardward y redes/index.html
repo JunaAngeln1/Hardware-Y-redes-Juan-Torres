@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprendiendo Hardware - Plataforma Educativa</title>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        header .author {
+            color: #764ba2;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .objective-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .objective-box h2 {
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+
+        .component-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .component-section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .component-section h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .model-container {
+            width: 100%;
+            height: 400px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px dashed #667eea;
+        }
+
+        .model-placeholder {
+            color: #999;
+            font-size: 1.2em;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .content-full {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+        }
+
+        .content-summary {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            border-radius: 5px;
+        }
+
+        .content-summary h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .glossary {
+            background: #e7f3ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .glossary-term {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+
+        .glossary-term strong {
+            color: #667eea;
+        }
+
+        .faq-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .faq-section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 8px;
+        }
+
+        .chatbot-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            min-height: 200px;
+            border: 3px dashed #764ba2;
+        }
+
+        .chatbot-placeholder {
+            color: #999;
+            font-size: 1.2em;
+            text-align: center;
+            padding: 40px;
+        }
+
+        footer {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        footer p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        footer .author-footer {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ENCABEZADO -->
+        <header>
+            <h1>🖥️ Explorando el Hardware de Computadoras</h1>
+            <p class="subtitle">Plataforma Educativa Interactiva</p>
+            <p class="author">Desarrollado por: Juan Angel Torres Mecado</p>
+            <p>Proyecto Educativo - Grado 10-11</p>
+        </header>
+
+        <!-- OBJETIVO PEDAGÓGICO -->
+        <div class="objective-box">
+            <h2>🎯 Objetivo Pedagógico</h2>
+            <p>Comprender los componentes fundamentales del hardware de una computadora (memoria RAM, procesador y placa madre), identificando sus funciones, características técnicas y su interacción dentro del sistema, para desarrollar competencias en el análisis y comprensión de tecnologías de información.</p>
+        </div>
+
+        <!-- SECCIÓN: MEMORIA RAM -->
+        <section class="component-section">
+            <h2>💾 Memoria RAM (Random Access Memory)</h2>
+            
+            <div class="model-container">
+                
+                 <model-viewer 
+    src="./Models/ram.glb"
+    alt="Modelo 3D de Memoria RAM"
+    auto-rotate 
+    camera-controls
+    style="width: 100%; height: 100%;">
+</model-viewer>
+                <div class="model-placeholder">
+                    <p>📦 Espacio reservado para modelo 3D de RAM</p>
+                    
+                </div>
+            </div>
+
+            <div class="content-full">
+                <h3>¿Qué es la Memoria RAM?</h3>
+                <p>La memoria RAM es un componente de almacenamiento temporal que permite a la computadora acceder rápidamente a los datos que está utilizando en el momento. Es como el escritorio de trabajo donde colocas los documentos que estás usando ahora mismo: mientras más grande sea tu escritorio, más documentos podrás tener abiertos simultáneamente.</p>
+
+                <h3>Función Principal</h3>
+                <p>La RAM almacena temporalmente las instrucciones de los programas en ejecución y los datos que estos programas necesitan procesar. Cuando apagas la computadora, toda la información en la RAM se borra, por eso se llama memoria volátil. Su velocidad de acceso es mucho mayor que la de un disco duro o SSD, permitiendo que el procesador trabaje eficientemente.</p>
+
+                <h3>Tipos de Memoria RAM</h3>
+                <ul>
+                    <li><strong>DDR (Double Data Rate):</strong> Primera generación de RAM moderna, ya obsoleta.</li>
+                    <li><strong>DDR2:</strong> Mejora sobre DDR con mayor velocidad y menor consumo energético.</li>
+                    <li><strong>DDR3:</strong> Estándar común hasta hace pocos años, con velocidades de 800-2133 MHz.</li>
+                    <li><strong>DDR4:</strong> Actualmente muy utilizada, ofrece velocidades de 2133-3200 MHz y mayor eficiencia.</li>
+                    <li><strong>DDR5:</strong> La más reciente, con velocidades superiores a 4800 MHz y mejor rendimiento general.</li>
+                </ul>
+
+                <h3>Partes de un Módulo RAM</h3>
+                <ul>
+                    <li><strong>PCB (Placa de Circuito Impreso):</strong> La base verde donde se montan todos los componentes.</li>
+                    <li><strong>Chips de memoria:</strong> Los rectángulos negros que almacenan la información.</li>
+                    <li><strong>Contactos dorados:</strong> Los pines que conectan la RAM con la placa madre.</li>
+                    <li><strong>Muesca de posicionamiento:</strong> Corte en los contactos que evita instalar incorrectamente el módulo.</li>
+                    <li><strong>Disipador de calor (opcional):</strong> Láminas metálicas que ayudan a mantener la temperatura baja.</li>
+                </ul>
+
+                <h3>Ejemplos de Uso</h3>
+                <p>Una computadora con 4GB de RAM puede ejecutar navegador web y editor de texto simultáneamente. Con 8GB puedes editar fotos y videos básicos. Con 16GB o más puedes realizar edición profesional, jugar videojuegos exigentes o ejecutar máquinas virtuales. La cantidad de RAM determina cuántas tareas puedes realizar al mismo tiempo sin que el sistema se ralentice.</p>
+            </div>
+
+            <div class="content-summary">
+                <h4>📌 Resumen Rápido - RAM</h4>
+                <p><strong>Definición:</strong> Memoria temporal de acceso rápido que almacena datos de programas en ejecución.</p>
+                <p><strong>Tipos principales:</strong> DDR3, DDR4 y DDR5 (de menor a mayor velocidad).</p>
+                <p><strong>Partes clave:</strong> Chips de memoria, contactos dorados, PCB y disipador.</p>
+                <p><strong>Importancia:</strong> Determina cuántos programas puedes ejecutar simultáneamente.</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: PROCESADOR (CPU) -->
+        <section class="component-section">
+            <h2>⚡ Procesador (CPU - Central Processing Unit)</h2>
+            
+            <div class="model-container">
+                <!-- INSERTAR-MODELO-CPU-AQUI -->
+                  <model-viewer 
+    src="./Models/computer_processor.glb"
+    alt="Modelo 3D de Memoria RAM"
+    auto-rotate 
+    camera-controls
+    style="width: 100%; height: 100%;">
+</model-viewer>
+                 
+                <div class="model-placeholder">
+                    <p>📦 Espacio reservado para modelo 3D de CPU</p>
+                    <p style="font-size: 0.9em;"></p>
+                </div>
+            </div>
+
+            <div class="content-full">
+                <h3>¿Qué es el Procesador?</h3>
+                <p>El procesador es el cerebro de la computadora. Es el componente que ejecuta todas las instrucciones de los programas, realiza cálculos matemáticos, toma decisiones lógicas y coordina el funcionamiento de todos los demás componentes. Cada acción que realizas en tu computadora requiere millones de operaciones del procesador.</p>
+
+                <h3>Funcionamiento Básico</h3>
+                <p>El CPU funciona en un ciclo continuo de cuatro pasos: <strong>Fetch</strong> (buscar instrucción), <strong>Decode</strong> (decodificar qué hacer), <strong>Execute</strong> (ejecutar la operación) y <strong>Store</strong> (guardar resultado). Este ciclo se repite miles de millones de veces por segundo. El procesador lee instrucciones de la memoria RAM, las procesa usando sus circuitos internos y envía los resultados de vuelta.</p>
+
+                <h3>Partes Internas del Procesador</h3>
+                <ul>
+                    <li><strong>Núcleos (Cores):</strong> Unidades de procesamiento independientes dentro del CPU. Más núcleos permiten realizar más tareas simultáneamente.</li>
+                    <li><strong>ALU (Unidad Aritmético-Lógica):</strong> Realiza operaciones matemáticas y lógicas.</li>
+                    <li><strong>Unidad de Control:</strong> Dirige el flujo de datos y coordina las operaciones.</li>
+                    <li><strong>Caché:</strong> Memoria ultra rápida dentro del CPU (L1, L2, L3) que almacena datos frecuentemente usados.</li>
+                    <li><strong>Registros:</strong> Pequeñas memorias que almacenan datos temporales durante el procesamiento.</li>
+                    <li><strong>Bus de datos:</strong> Canales por donde viaja la información entre componentes.</li>
+                </ul>
+
+                <h3>Tipos de Procesadores</h3>
+                <ul>
+                    <li><strong>Intel Core:</strong> Familia i3 (básico), i5 (medio), i7 (avanzado), i9 (profesional).</li>
+                    <li><strong>AMD Ryzen:</strong> Ryzen 3, 5, 7 y 9, competidores directos de Intel con excelente relación precio-rendimiento.</li>
+                    <li><strong>ARM:</strong> Procesadores de bajo consumo usados en smartphones y tablets.</li>
+                    <li><strong>Apple Silicon (M1, M2, M3):</strong> Procesadores propios de Apple con arquitectura ARM optimizada.</li>
+                </ul>
+
+                <h3>Velocidad del Procesador</h3>
+                <p>La velocidad se mide en <strong>GHz (Gigahertz)</strong>. Un procesador de 3.5 GHz realiza 3,500 millones de ciclos por segundo. Sin embargo, la velocidad no es el único factor: el número de núcleos, la arquitectura, el tamaño de caché y la generación también afectan el rendimiento. Un procesador moderno de 3 GHz con 8 núcleos puede superar a uno antiguo de 4 GHz con 2 núcleos.</p>
+
+                <h3>Ejemplos Prácticos</h3>
+                <p>Un procesador i3 es suficiente para navegar por internet y usar Office. Un i5 o Ryzen 5 es ideal para estudiantes que editan videos o juegan ocasionalmente. Un i7/i9 o Ryzen 7/9 es necesario para edición profesional, programación compleja, diseño 3D o gaming de alta gama.</p>
+            </div>
+
+            <div class="content-summary">
+                <h4>📌 Resumen Rápido - CPU</h4>
+                <p><strong>Definición:</strong> Cerebro de la computadora que ejecuta instrucciones y procesa datos.</p>
+                <p><strong>Partes clave:</strong> Núcleos, ALU, caché, unidad de control y registros.</p>
+                <p><strong>Tipos principales:</strong> Intel Core, AMD Ryzen, ARM, Apple Silicon.</p>
+                <p><strong>Velocidad:</strong> Medida en GHz, pero también depende de núcleos y arquitectura.</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: PLACA MADRE -->
+        <section class="component-section">
+            <h2>🔌 Placa Madre (Motherboard)</h2>
+            
+            <div class="model-container">
+                <!-- INSERTAR-MODELO-MOTHERBOARD-AQUI -->
+                  <model-viewer 
+    src="./Models/motherboard__components.glb"
+    alt="Modelo 3D de Memoria RAM"
+    auto-rotate 
+    camera-controls
+    style="width: 100%; height: 100%;">
+</model-viewer>
+                <div class="model-placeholder">
+                    <p>📦 Espacio reservado para modelo 3D de Placa Madre</p>
+                    
+                </div>
+            </div>
+
+            <div class="content-full">
+                <h3>¿Qué es la Placa Madre?</h3>
+                <p>La placa madre es el componente más grande dentro de una computadora. Funciona como el sistema nervioso del equipo: conecta y permite la comunicación entre todos los demás componentes. Sin ella, el procesador, la RAM, el disco duro y las tarjetas de expansión no podrían trabajar juntos.</p>
+
+                <h3>Componentes Principales</h3>
+                <ul>
+                    <li><strong>Socket del CPU:</strong> Ranura donde se instala el procesador. Cada tipo de CPU requiere un socket específico (LGA 1700, AM5, etc.).</li>
+                    <li><strong>Ranuras de RAM:</strong> Generalmente 2 o 4 ranuras DIMM donde se insertan los módulos de memoria.</li>
+                    <li><strong>Ranuras PCIe:</strong> Conectores para tarjetas de expansión como GPU, tarjetas de sonido o de red.</li>
+                    <li><strong>Conectores SATA:</strong> Puertos para conectar discos duros y unidades SSD SATA.</li>
+                    <li><strong>Slots M.2:</strong> Ranuras para SSD ultra rápidos de nueva generación.</li>
+                    <li><strong>Batería CMOS:</strong> Pila circular que mantiene la configuración de BIOS cuando la PC está apagada.</li>
+                    <li><strong>Conectores de energía:</strong> Entrada principal de 24 pines y conector de 8 pines para el CPU.</li>
+                    <li><strong>Panel de E/S trasero:</strong> Área con puertos USB, HDMI, Ethernet, audio, etc.</li>
+                </ul>
+
+                <h3>El Chipset</h3>
+                <p>El chipset es el conjunto de circuitos integrados que controla el flujo de datos entre el CPU y los demás componentes. Se divide en dos partes principales:</p>
+                <ul>
+                    <li><strong>Northbridge (o integrado en CPU moderno):</strong> Gestiona comunicación de alta velocidad con RAM y GPU.</li>
+                    <li><strong>Southbridge (PCH - Platform Controller Hub):</strong> Controla dispositivos más lentos como USB, SATA, audio y red.</li>
+                </ul>
+                <p>El chipset determina qué procesadores son compatibles, cuánta RAM puedes instalar y qué tecnologías están disponibles (USB 3.2, PCIe 4.0/5.0, etc.).</p>
+
+                <h3>Puertos y Conectores Comunes</h3>
+                <ul>
+                    <li><strong>USB 2.0/3.0/3.1/3.2:</strong> Para periféricos y dispositivos de almacenamiento.</li>
+                    <li><strong>USB-C / Thunderbolt:</strong> Conexión de alta velocidad multifuncional.</li>
+                    <li><strong>HDMI / DisplayPort:</strong> Salidas de video digital.</li>
+                    <li><strong>RJ45 (Ethernet):</strong> Conexión de red por cable.</li>
+                    <li><strong>Audio Jack:</strong> Entradas y salidas de audio analógico.</li>
+                    <li><strong>PS/2:</strong> Puertos antiguos para teclado y mouse (ya casi no se usan).</li>
+                </ul>
+
+                <h3>Tamaños Estándar</h3>
+                <p><strong>ATX:</strong> Tamaño completo (305 x 244 mm), más ranuras de expansión. <strong>Micro-ATX:</strong> Tamaño medio (244 x 244 mm), buena relación espacio-funcionalidad. <strong>Mini-ITX:</strong> Compacta (170 x 170 mm), ideal para PCs pequeñas con lo básico.</p>
+            </div>
+
+            <div class="content-summary">
+                <h4>📌 Resumen Rápido - Placa Madre</h4>
+                <p><strong>Definición:</strong> Circuito principal que conecta todos los componentes de la computadora.</p>
+                <p><strong>Componentes clave:</strong> Socket CPU, ranuras RAM y PCIe, chipset, puertos de E/S.</p>
+                <p><strong>Chipset:</strong> Controla comunicación entre CPU y periféricos.</p>
+                <p><strong>Tamaños:</strong> ATX (grande), Micro-ATX (medio), Mini-ITX (pequeño).</p>
+            </div>
+        </section>
+
+        <!-- GLOSARIO -->
+        <section class="component-section">
+            <h2>📚 Glosario de Términos de Hardware</h2>
+            
+            <div class="glossary">
+                <div class="glossary-term">
+                    <strong>Ancho de banda:</strong> Cantidad de datos que puede transferirse por segundo entre componentes. Se mide en GB/s o Gbps.
+                </div>
+                
+                <div class="glossary-term">
+                    <strong>BIOS (Basic Input/Output System):</strong> Firmware que inicializa el hardware al encender la computadora y carga el sistema operativo.
+                </div>
+                
+                <div class="glossary-term">
+                    <strong>Bus:</strong> Conjunto de líneas de comunicación que transportan datos entre componentes del sistema.
+                </div>
+                
+                <div class="glossary-term">
+                    <strong>Caché:</strong> Memoria pequeña y ultra rápida que almacena datos frecuentemente usados para acelerar el procesamiento.
+                </div>
+                
+                <div class="glossary-term">
+                    <strong>Clock Speed (Velocidad de reloj):</strong> Frecuencia a la que opera un procesador, medida en GHz. Indica cuántos ciclos por segundo puede ejecutar.
+                </div>
+                
+                <div class="glossary-term">
+                    <strong>DDR (Double Data Rate):</strong> Tecnología de memoria RAM que transfiere datos dos veces por ciclo de reloj.
+                </div>
+                
+                <div class="glossary-term">
+                    <strong>Firmware:</strong> Software permanente grabado en hardware que controla funciones básicas del dispositivo.
+                </div>
+                
+                <div class="glossary-term">
+                    <strong>GPU (Graphics Processing Unit):</strong> Procesador especializado en gráficos y cálculos paralelos masivos.
+                </div>
+                
+                <div class="glossary-term">
+                    <strong>Latencia:</strong> Tiempo de retardo entre una solicitud de datos y su entrega. Menor latencia es mejor.
+                </div>
+                
+                <div class="glossary-term">
+                    <strong>Overclocking:</strong> Aumentar la velocidad de un componente más allá de sus especificaciones originales para mejorar rendimiento.
+                </div>
+                
+                <div class="glossary-term">
+                    <strong>PCIe (Peripheral Component Interconnect Express):</strong> Estándar de conexión de alta velocidad para tarjetas de expansión.
+                </div>
+                
+                <div class="glossary-term">
+                    <strong>Socket:</strong> Conector físico en la placa madre donde se instala el procesador.
+                </div>
+                
+                <div class="glossary-term">
+                    <strong>TDP (Thermal Design Power):</strong> Cantidad máxima de calor que genera un componente, medida en watts. Determina el sistema de enfriamiento necesario.
+                </div>
+                
+                <div class="glossary-term">
+                    <strong>Throughput:</strong> Cantidad total de trabajo que un sistema puede procesar en un período de tiempo determinado.
+                </div>
+                
+                <div class="glossary-term">
+                    <strong>Voltaje:</strong> Presión eléctrica medida en voltios (V) que alimenta los componentes. Más voltaje aumenta rendimiento pero genera más calor.
+                </div>
+            </div>
+        </section>
+
+        <!-- PREGUNTAS FRECUENTES -->
+        <section class="faq-section">
+            <h2>❓ Preguntas Frecuentes</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">¿Cuál es la diferencia entre RAM y disco duro?</div>
+                <p>La RAM es memoria temporal y rápida que se borra al apagar la PC. El disco duro es almacenamiento permanente y más lento donde guardas archivos que persisten después de apagar el equipo.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">¿Más núcleos siempre significa mejor procesador?</div>
+                <p>No necesariamente. Más núcleos ayudan en tareas que pueden dividirse en múltiples procesos (edición de video, renderizado). Para tareas simples, un procesador con menos núcleos pero mayor velocidad puede ser más rápido.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">¿Puedo mezclar diferentes marcas de RAM?</div>
+                <p>Técnicamente sí, pero no es recomendable. Pueden surgir problemas de compatibilidad. Lo ideal es usar módulos idénticos (misma marca, velocidad y capacidad) para mejor rendimiento y estabilidad.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">¿Qué es mejor: Intel o AMD?</div>
+                <p>Ambos fabricantes ofrecen excelentes procesadores. AMD Ryzen suele ofrecer mejor relación precio-rendimiento, mientras que Intel históricamente ha liderado en rendimiento de un solo núcleo. La elección depende de tu presupuesto y necesidades específicas.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">¿Por qué mi computadora solo reconoce 3.5GB de RAM si instalé 4GB?</div>
+                <p>Esto ocurre en sistemas operativos de 32 bits, que tienen un límite de direccionamiento de memoria. Además, parte de la RAM puede estar reservada para la GPU integrada. Un sistema de 64 bits resolverá este problema.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">¿Qué significa que un procesador sea de 7nm o 5nm?</div>
+                <p>Es el tamaño del proceso de fabricación de los transistores. Nanómetros más pequeños significan transistores más pequeños, permitiendo más potencia en menos espacio con menor consumo eléctrico y generación de calor.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">¿Necesito refrigeración líquida para mi CPU?</div>
+                <p>No es obligatoria para la mayoría de usuarios. La refrigeración por aire es suficiente para procesadores estándar. La líquida es útil para CPUs de alto rendimiento, overclocking extremo o PCs silenciosas.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">¿Puedo actualizar el procesador sin cambiar la placa madre?</div>
+                <p>Depende del socket y chipset. Si el nuevo CPU usa el mismo socket y es compatible con el chipset de tu placa madre (verificar en sitio del fabricante), puedes actualizarlo. A menudo es necesario actualizar la BIOS antes.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">¿Qué es dual channel y por qué es importante?</div>
+                <p>Dual channel usa dos módulos de RAM simultáneamente, duplicando el ancho de banda. Es más eficiente usar 2 módulos de 8GB que 1 de 16GB, ya que trabajan en paralelo mejorando el rendimiento general del sistema.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">¿Cómo sé si mi hardware es compatible?</div>
+                <p>Debes verificar: (1) El socket del CPU coincide con el de la placa madre, (2) La RAM es del tipo correcto (DDR4/DDR5) y velocidad soportada, (3) La fuente de poder tiene suficiente wataje, (4) El gabinete tiene espacio para todos los componentes.</p>
+            </div>
+        </section>
+
+        <!-- CHATBOT -->
+        <section class="component-section">
+            <h2>💬 Asistente Virtual de Hardware</h2>
+            <p>Haz preguntas sobre hardware y obtén respuestas instantáneas.</p>
+            
+            <script src='https://cdn.jotfor.ms/agent/embedjs/019aa48b43527cedac1b7682c5e542199a40/embed.js'></script>
